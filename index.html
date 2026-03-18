@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Viewer Aman - CoinzoneMedia</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: #f9fafb;
+    }
+    #topbar {
+      padding: 12px 16px;
+      background: #1e293b;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #topbar input {
+      padding: 6px 10px;
+      width: 280px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    #topbar button {
+      padding: 6px 12px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #topbar button:hover {
+      background: #2563eb;
+    }
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+    #ad {
+      background: #facc15;
+      color: #1e293b;
+      text-align: center;
+      font-weight: bold;
+      padding: 14px;
+      font-size: 14px;
+    }
+    @media (max-width: 640px) {
+      #topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #topbar input, #topbar button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div id="topbar">
+    <div><strong>🔒 Coinzone Safe Web Viewer</strong></div>
+    <div style="display: flex; gap: 8px;">
+      <input type="text" id="urlInput" placeholder="Masukkan URL seperti example.com" />
+      <button onclick="loadSite()">Muat Website</button>
+    </div>
+  </div>
+
+  <!-- Web Viewer -->
+  <iframe
+    id="webview"
+    sandbox="allow-scripts allow-same-origin allow-forms"
+    allowfullscreen
+></iframe>
+
+  <!-- Iklan Aman di Bawah -->
+  <div id="ad">📢 Iklan Aman: Dukung info kripto bersama #CoinzoneMedia 📢</div>
+
+  <!-- Script -->
+  <script>
+    function isValidUrl(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function loadSite() {
+      const input = document.getElementById("urlInput").value.trim();
+      let url = input;
+
+      if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+      }
+
+      if (!isValidUrl(url)) {
+        alert("❌ URL tidak valid.");
+        return;
+      }
+
+      const iframe = document.getElementById("webview");
+      iframe.src = url;
+    }
+  </script>
+</body>
+</html>
